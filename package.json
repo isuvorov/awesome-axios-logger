@@ -1,0 +1,138 @@
+{
+  "type": "module",
+  "name": "awesome-axios-logger",
+  "version": "0.0.1",
+  "description": "Axios interceptors for automatic HTTP request/response/error logging to console & files",
+  "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
+  "private": false,
+  "scripts": {
+    "build:tsdown": "        tsdown",
+    "build:tsdown:release": "tsdown --out-dir lib",
+    "build": "               bun run build:tsdown:release",
+    "build:all": "           bun run build:bunup && bun run build:tsup && bun run build:tsdown && bun run build:tsc",
+    "dev": "                 tsdown --watch",
+    "test:unit": "           bun test",
+    "test:unit:watch": "     bun test --watch",
+    "test:types": "          tsc --noEmit",
+    "test:lint": "           biome lint",
+    "test:size": "           size-limit",
+    "test": "                bun run test:lint && bun run test:types && bun run test:unit && bun run test:size",
+    "test:watch": "          bun run test:unit:watch",
+    "fix:lint": "            biome check --write",
+    "fix": "                 bun run fix:lint",
+    "version:patch": "       bun version patch && git push && git push --tags",
+    "version:release": "     semantic-release --no-ci --dry-run ",
+    "release": "             bun run build && bun run test && bun run version:release && bun publish"
+  },
+  "dependencies": {
+    "@lsk4/log": "^4.28.0"
+  },
+  "peerDependencies": {
+    "axios": "^1.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@size-limit/preset-small-lib": "^11.2.0",
+    "@types/node": "^24.9.1",
+    "axios": "^1.9.0",
+    "bunup": "^0.15.12",
+    "semantic-release": "^25.0.1",
+    "size-limit": "^11.2.0",
+    "tsdown": "^0.15.11",
+    "typescript": "5.9.3"
+  },
+  "//": "///////////========================/////////========================/////////========================/////////",
+  "files": [
+    "lib",
+    "cjs",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./*": {
+      "import": "./lib/*.js",
+      "types": "./lib/*.d.ts",
+      "default": "./lib/*.js"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.js",
+      "limit": "2kb",
+      "ignore": ["axios", "@lsk4/log", "node:os", "node:fs/promises", "node:path"]
+    },
+    {
+      "path": "lib/saveLog.js",
+      "limit": "1kb",
+      "ignore": ["node:fs/promises", "node:path"]
+    },
+    {
+      "path": "lib/utils.js",
+      "limit": "1kb",
+      "ignore": ["node:os"]
+    }
+  ],
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": true,
+          "provenance": true
+        }
+      ],
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "bun.lock",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): 🎉 v${nextRelease.version}\n\n${nextRelease.notes}\n\n[skip ci]"
+        }
+      ]
+    ]
+  },
+  "///": "//////////========================/////////========================/////////========================/////////",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isuvorov/awesome-axios-logger.git"
+  },
+  "homepage": "https://github.com/isuvorov/awesome-axios-logger",
+  "bugs": "https://github.com/isuvorov/awesome-axios-logger/issues",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "axios",
+    "logger",
+    "interceptor",
+    "http",
+    "logging",
+    "debug",
+    "request",
+    "response",
+    "typescript",
+    "esm"
+  ],
+  "////": "/////////========================/////////========================/////////========================/////////"
+}
