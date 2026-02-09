@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "awesome-axios-logger",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Axios interceptors for automatic HTTP request/response/error logging to console & files",
   "author": "Igor Suvorov <hi@isuvorov.com> (https://github.com/isuvorov)",
   "private": false,
@@ -68,17 +68,28 @@
     {
       "path": "lib/index.js",
       "limit": "2kb",
-      "ignore": ["axios", "@lsk4/log", "node:os", "node:fs/promises", "node:path"]
+      "ignore": [
+        "axios",
+        "@lsk4/log",
+        "node:os",
+        "node:fs/promises",
+        "node:path"
+      ]
     },
     {
       "path": "lib/saveLog.js",
       "limit": "1kb",
-      "ignore": ["node:fs/promises", "node:path"]
+      "ignore": [
+        "node:fs/promises",
+        "node:path"
+      ]
     },
     {
       "path": "lib/utils.js",
       "limit": "1kb",
-      "ignore": ["node:os"]
+      "ignore": [
+        "node:os"
+      ]
     }
   ],
   "release": {
